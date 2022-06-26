@@ -1,4 +1,4 @@
-Deploying large python packages on AWS Lambda using EFS 
+Deploying python packages on AWS Lambda using EFS 
 
 In this chapter, we will work a few of the many different services that aws provides and how it provides us with many different tools to be able to deploy our work.
 
