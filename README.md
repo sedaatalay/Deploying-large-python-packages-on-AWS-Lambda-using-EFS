@@ -1,26 +1,26 @@
-Deploying python packages on AWS Lambda using EFS 
+## Deploying python packages on AWS Lambda using EFS 
 
-In this chapter, we will work a few of the many different services that aws provides and how it provides us with many different tools to be able to deploy our work.
+### In this chapter, we will work a few of the many different services that aws provides and how it provides us with many different tools to be able to deploy our work.
 
-What is lambda?
+### What is lambda?
 
-AWS Lambda is an AWS service that lets you run code without provisioning or managing servers. So it’s serverless. This means that the user is only interacting with the function as an entity, not with anything related to the server they are running. This simplifies some operations and costs as AWS only charges for the time the function uses.
+#### AWS Lambda is an AWS service that lets you run code without provisioning or managing servers. So it’s serverless. This means that the user is only interacting with the function as an entity, not with anything related to the server they are running. This simplifies some operations and costs as AWS only charges for the time the function uses.
 
-However, there may be some restrictions in the working model of lambda, such as the time the code could be running, memory, and such. These constraints may enable us to use lambda with different solutions.
+#### However, there may be some restrictions in the working model of lambda, such as the time the code could be running, memory, and such. These constraints may enable us to use lambda with different solutions.
 
-Now let's consider python libraries.
+#### Now let's consider python libraries.
 
-What can we do if we want to run libraries that do not come with the basic python installation, plus a library on memory that exceeds the limits of the Lambda?
+#### What can we do if we want to run libraries that do not come with the basic python installation, plus a library on memory that exceeds the limits of the Lambda?
 
 - We can install these libraries on an EFS and connect the EFS to the Lambda function.
 
-What is EFS?
+### What is EFS?
 
-EFS stands for Elastic File System and is a file system located inside a VPC (Virtual private cloud) that allows you to store or access data. Having the libraries in EFS and having the Lambda function we will use use these libraries. 
+#### EFS stands for Elastic File System and is a file system located inside a VPC (Virtual private cloud) that allows you to store or access data. Having the libraries in EFS and having the Lambda function we will use use these libraries. 
 
-Let's do it step by step 
+#### Let's do it step by step 
 
-1. VPC (Virtual Private Cloud)
+### 1. VPC (Virtual Private Cloud)
 
 Everything happens in a VPC context. That's why we need to create a VPC (or use a prebuilt VPC) first.
 
@@ -31,7 +31,7 @@ Next, you choose to create a simple VPC with a public network and we can give it
 
 Then we have our newly created VPC.
 
-2. Create Security Group
+### 2. Create Security Group
 
 AWS is the arrangement of many interactions of different components to ensure security. For most of these interactions, we use what is called a "security group", which contains sets of rules that allow an entity to connect to the outside (outbound rules) or allow something to connect to it from outside the entity (inbound rules).
 
@@ -40,7 +40,7 @@ AWS is the arrangement of many interactions of different components to ensure se
 <img width="851" alt="Ekran Resmi 2022-06-25 17 22 16" src="https://user-images.githubusercontent.com/91700155/175808488-2731fd09-bca7-4658-9760-08d18e154303.png">
 
 
-3. Create and configure EFS
+### 3. Create and configure EFS
 
 Go to console and look for EFS. Then click in "create file system" and then give a name and choose the VPC that the EFS would be connected to.
 
@@ -68,7 +68,7 @@ The rest is optional. I filled in the optional parts as in the appendix.
 <img width="567" alt="Ekran Resmi 2022-06-25 17 33 01" src="https://user-images.githubusercontent.com/91700155/175809166-12b296cb-0bb1-41b4-9c79-497aca5a28fa.png">
 
 
-4. Test that the EFS is working
+### 4. Test that the EFS is working
 Now we'll test that EFS works like a proper file system and that we can interact with it. Before we create a lambda function, we need to define the privileges of the IAM role we will use.
 
 - IAM (Identity and access management) Role
@@ -77,7 +77,7 @@ You can access the IAM role via the AWS console. Create role and add to policies
 <img width="425" alt="Ekran Resmi 2022-06-25 17 35 17" src="https://user-images.githubusercontent.com/91700155/175809282-d7face26-c099-444c-a830-b162bf89021d.png">
 
 
-5. Create Lambda Function
+### 5. Create Lambda Function
 Again, we will create Lambda over the AWS console. I used Python 3.8 for this work, but you could choose a different version or language.
 
 <img width="851" alt="Ekran Resmi 2022-06-25 17 36 51" src="https://user-images.githubusercontent.com/91700155/175809422-86fa47cc-8657-48f3-a859-580bf37e88be.png">
@@ -100,7 +100,7 @@ Again, we will create Lambda over the AWS console. I used Python 3.8 for this wo
 
 Here choose the EFS we created before, add the Access point and the path where we are going to mount the EFS.
 
-6. Test connection between Lambda and EFS
+### 6. Test connection between Lambda and EFS
 Here we will test whether the connection between EFS and Lambda works with a small example.
 
 Go to the "Code" part of your Lambda. Copy the following exapmle code.
@@ -132,22 +132,22 @@ Now what we can create our test sample with our EFS through an EC2 instance, thi
 7. Create an EC2 instance
 EC2 stands for Elastic cloud computing. It allows you to create a server.  We’ll just create a simple and free kind of EC2 instance and then we’ll mount the EFS that we created on this instance.
 
-I have progressed through Ubuntu 20.04, but you can proceed as you wish, except for the "configure instance" and "configure security group" fields, except this part, other parts are optional.
+- I have progressed through Ubuntu 20.04, but you can proceed as you wish, except for the "configure instance" and "configure security group" fields, except this part, other parts are optional.
 
 <img width="567" alt="Ekran Resmi 2022-06-25 17 52 53" src="https://user-images.githubusercontent.com/91700155/175810046-b260ab7b-680b-4d89-80f3-6dfa3c63f021.png">
 <img width="851" alt="Ekran Resmi 2022-06-26 14 05 38" src="https://user-images.githubusercontent.com/91700155/175811244-1ba90d4b-4b37-404a-83b5-640924656cb1.png">
 <img width="851" alt="Ekran Resmi 2022-06-26 14 06 22" src="https://user-images.githubusercontent.com/91700155/175811256-70ce0053-b22c-4101-93d1-3eb7e673f0a5.png">
 
+- Create new key pair
 
-Create new key pair
 <img width="425" alt="Ekran Resmi 2022-06-25 17 55 12" src="https://user-images.githubusercontent.com/91700155/175810094-8f4bbd63-1df5-4cf2-b0fa-f17776335189.png">
 
-Getting your connect instance inf.
+- Getting your connect instance inf.
+
 <img width="567" alt="Ekran Resmi 2022-06-25 18 02 25" src="https://user-images.githubusercontent.com/91700155/175810097-72d919e3-701d-416e-9f4b-282afec0cbd3.png">
 <img width="930" alt="Ekran Resmi 2022-06-25 18 04 45" src="https://user-images.githubusercontent.com/91700155/175810078-972089fb-c2ef-4578-8bff-e834d49f6b8d.png">
 
 - Example Installations 
-
    - NFS Configurations
 ```console
 sudo apt-get update
@@ -155,7 +155,7 @@ sudo apt-get install nfs-common
 mkdir mnt
 ```
 
-After doing that let's go to the EFS we created and click the attach part in the upper right. Copy the NFS client command paste that but without the "efs" at the end.
+   After doing that let's go to the EFS we created and click the attach part in the upper right. Copy the NFS client command paste that but without the "efs" at the end.
 
 <img width="1248" alt="Ekran Resmi 2022-06-25 18 06 46" src="https://user-images.githubusercontent.com/91700155/175810616-e79691d2-7951-4bf4-a80c-eb695e380552.png">
 
@@ -174,7 +174,7 @@ sudo update-alternatives --config python3
 pip3 install --upgrade --target mnt/access/ numpy
 ```
  
-8. Lambda Function with example libraries from EFS
+### 8. Lambda Function with example libraries from EFS
 Let’s go back to the Lambda. Deploy the example code.
 ```
 import json
