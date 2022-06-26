@@ -18,7 +18,7 @@
 
 #### EFS stands for Elastic File System and is a file system located inside a VPC (Virtual private cloud) that allows you to store or access data. Having the libraries in EFS and having the Lambda function we will use use these libraries. 
 
-#### Let's do it step by step 
+### Let's do it step by step 
 
 ### 1. VPC (Virtual Private Cloud)
 
@@ -51,12 +51,12 @@ Select the EFS that you created and click the network area:
 
 <img width="1131" alt="Ekran Resmi 2022-06-25 17 23 53" src="https://user-images.githubusercontent.com/91700155/175808882-a3d11974-7941-4634-9969-720a88c71d25.png">
 
-Then click a button that says "Manage". 
-Now we will add security gorup that we created before in addition you can add default security group. 
+ Then click a button that says "Manage". Now we will add security group that we created before in addition you can add default security group. 
 
 <img width="1152" alt="Ekran Resmi 2022-06-25 17 28 54" src="https://user-images.githubusercontent.com/91700155/175808937-b67a01bf-fa94-4078-a98c-bd7b6b422d5f.png">
 
 - Access Point
+
 Select the EFS that you created and click on Access points. Then click on "Create access point".
 
 <img width="851" alt="Ekran Resmi 2022-06-25 17 30 32" src="https://user-images.githubusercontent.com/91700155/175809044-15583814-36bf-49d4-bdc0-5c1f9d2b8e37.png">
