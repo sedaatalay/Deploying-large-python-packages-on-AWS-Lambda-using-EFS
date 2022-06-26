@@ -135,6 +135,7 @@ Then you have to click on 'Deploy', 'Test' and finally you will get a printout.
 <img width="680" alt="Ekran Resmi 2022-06-26 13 28 54" src="https://user-images.githubusercontent.com/91700155/175809989-3fed82c2-026d-4ae0-83f7-1def7335b3bb.png">
 
 Congratulations! We have the EFS already connected with our simple Lambda Function.
+ 
 Now what we can create our test sample with our EFS through an EC2 instance, this will make easier install files on our /mnt/access folder.
 
 ### 7. Create an EC2 instance
@@ -165,11 +166,11 @@ sudo apt-get update
 sudo apt-get install nfs-common
 mkdir mnt
 ```
-##### After doing that let's go to the EFS we created and click the attach part in the upper right. Copy the NFS client command paste that but without the "efs" at the end.
+###### After doing that let's go to the EFS we created and click the attach part in the upper right. Copy the NFS client command paste that but without the "efs" at the end.
 
 <img width="1248" alt="Ekran Resmi 2022-06-25 18 06 46" src="https://user-images.githubusercontent.com/91700155/175810616-e79691d2-7951-4bf4-a80c-eb695e380552.png">
 
-##### For me: 
+###### For me: 
  
 ```console
 sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-095de34f07883e4b0.efs.eu-central-1.amazonaws.com:/ mnt
@@ -182,7 +183,7 @@ sudo apt-get install python3.8
 sudo apt-get install python3-pip
 sudo update-alternatives --config python3
 ```
-   #### Now I will install the Python libraries in my access folder.
+###### Now I will install the Python libraries in my access folder.
 ```console      
 pip3 install --upgrade --target mnt/access/ numpy
 ```
@@ -212,7 +213,7 @@ Great! We connected our EFS to our lambda function and we are using the librarie
 To reach :
 
 
-<p>>/br>
+<p></br>
    <p>
 
 
