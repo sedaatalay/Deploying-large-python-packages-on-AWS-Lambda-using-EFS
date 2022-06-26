@@ -184,6 +184,7 @@ sudo apt-get install python3-pip
 sudo update-alternatives --config python3
 ```
 ###### Now I will install the Python libraries in my access folder.
+ 
 ```console      
 pip3 install --upgrade --target mnt/access/ numpy
 ```
