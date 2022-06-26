@@ -20,6 +20,8 @@
 
 ### Let's do it step by step 
 
+<p>
+
 ### 1. VPC (Virtual Private Cloud)
 
 Everything happens in a VPC context. That's why we need to create a VPC (or use a prebuilt VPC) first.
@@ -47,37 +49,42 @@ Go to console and look for EFS. Then click in "create file system" and then give
 <img width="425" alt="Ekran Resmi 2022-06-25 17 23 27" src="https://user-images.githubusercontent.com/91700155/175808720-931262cf-ef5e-4225-a8cf-993d144ae4d4.png">
 
 - Network 
-Select the EFS that you created and click the network area:
+ 
+#### Select the EFS that you created and click the network area:
 
 <img width="1131" alt="Ekran Resmi 2022-06-25 17 23 53" src="https://user-images.githubusercontent.com/91700155/175808882-a3d11974-7941-4634-9969-720a88c71d25.png">
 
- Then click a button that says "Manage". Now we will add security group that we created before in addition you can add default security group. 
+#### Then click a button that says "Manage". Now we will add security group that we created before in addition you can add default security group. 
 
 <img width="1152" alt="Ekran Resmi 2022-06-25 17 28 54" src="https://user-images.githubusercontent.com/91700155/175808937-b67a01bf-fa94-4078-a98c-bd7b6b422d5f.png">
 
 - Access Point
 
-Select the EFS that you created and click on Access points. Then click on "Create access point".
+#### Select the EFS that you created and click on Access points. Then click on "Create access point".
 
 <img width="851" alt="Ekran Resmi 2022-06-25 17 30 32" src="https://user-images.githubusercontent.com/91700155/175809044-15583814-36bf-49d4-bdc0-5c1f9d2b8e37.png">
 
-The important part is the directory name at the end. This folder is where we'll have the libraries that the Lambda Function will be able to connect to.
-The rest is optional. I filled in the optional parts as in the appendix.
+#### The important part is the directory name at the end. This folder is where we'll have the libraries that the Lambda Function will be able to connect to.
+ 
+#### The rest is optional. I filled in the optional parts as in the appendix.
 
 <img width="567" alt="Ekran Resmi 2022-06-25 17 32 53" src="https://user-images.githubusercontent.com/91700155/175809163-340c8ba3-2676-4c00-9288-d6626f427d8e.png">
 <img width="567" alt="Ekran Resmi 2022-06-25 17 33 01" src="https://user-images.githubusercontent.com/91700155/175809166-12b296cb-0bb1-41b4-9c79-497aca5a28fa.png">
 
 
 ### 4. Test that the EFS is working
+ 
 Now we'll test that EFS works like a proper file system and that we can interact with it. Before we create a lambda function, we need to define the privileges of the IAM role we will use.
 
 - IAM (Identity and access management) Role
-You can access the IAM role via the AWS console. Create role and add to policies that we need.
+
+#### You can access the IAM role via the AWS console. Create role and add to policies that we need.
 
 <img width="425" alt="Ekran Resmi 2022-06-25 17 35 17" src="https://user-images.githubusercontent.com/91700155/175809282-d7face26-c099-444c-a830-b162bf89021d.png">
 
 
 ### 5. Create Lambda Function
+
 Again, we will create Lambda over the AWS console. I used Python 3.8 for this work, but you could choose a different version or language.
 
 <img width="851" alt="Ekran Resmi 2022-06-25 17 36 51" src="https://user-images.githubusercontent.com/91700155/175809422-86fa47cc-8657-48f3-a859-580bf37e88be.png">
@@ -101,6 +108,7 @@ Again, we will create Lambda over the AWS console. I used Python 3.8 for this wo
 Here choose the EFS we created before, add the Access point and the path where we are going to mount the EFS.
 
 ### 6. Test connection between Lambda and EFS
+
 Here we will test whether the connection between EFS and Lambda works with a small example.
 
 Go to the "Code" part of your Lambda. Copy the following exapmle code.
@@ -130,6 +138,7 @@ Congratulations! We have the EFS already connected with our simple Lambda Functi
 Now what we can create our test sample with our EFS through an EC2 instance, this will make easier install files on our /mnt/access folder.
 
 7. Create an EC2 instance
+ 
 EC2 stands for Elastic cloud computing. It allows you to create a server.  We’ll just create a simple and free kind of EC2 instance and then we’ll mount the EFS that we created on this instance.
 
 - I have progressed through Ubuntu 20.04, but you can proceed as you wish, except for the "configure instance" and "configure security group" fields, except this part, other parts are optional.
