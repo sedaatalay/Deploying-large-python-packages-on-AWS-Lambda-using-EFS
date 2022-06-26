@@ -12,7 +12,7 @@
 
 #### What can we do if we want to run libraries that do not come with the basic python installation, plus a library on memory that exceeds the limits of the Lambda?
 
-- We can install these libraries on an EFS and connect the EFS to the Lambda function.
+#### We can install these libraries on an EFS and connect the EFS to the Lambda function.
 
 ### What is EFS?
 
@@ -48,7 +48,7 @@ Go to console and look for EFS. Then click in "create file system" and then give
 
 <img width="425" alt="Ekran Resmi 2022-06-25 17 23 27" src="https://user-images.githubusercontent.com/91700155/175808720-931262cf-ef5e-4225-a8cf-993d144ae4d4.png">
 
-- Network 
+### - Network 
  
 #### Select the EFS that you created and click the network area:
 
@@ -58,7 +58,7 @@ Go to console and look for EFS. Then click in "create file system" and then give
 
 <img width="1152" alt="Ekran Resmi 2022-06-25 17 28 54" src="https://user-images.githubusercontent.com/91700155/175808937-b67a01bf-fa94-4078-a98c-bd7b6b422d5f.png">
 
-- Access Point
+### - Access Point
 
 #### Select the EFS that you created and click on Access points. Then click on "Create access point".
 
@@ -76,7 +76,7 @@ Go to console and look for EFS. Then click in "create file system" and then give
  
 Now we'll test that EFS works like a proper file system and that we can interact with it. Before we create a lambda function, we need to define the privileges of the IAM role we will use.
 
-- IAM (Identity and access management) Role
+### - IAM (Identity and access management) Role
 
 #### You can access the IAM role via the AWS console. Create role and add to policies that we need.
 
@@ -89,19 +89,19 @@ Again, we will create Lambda over the AWS console. I used Python 3.8 for this wo
 
 <img width="851" alt="Ekran Resmi 2022-06-25 17 36 51" src="https://user-images.githubusercontent.com/91700155/175809422-86fa47cc-8657-48f3-a859-580bf37e88be.png">
 
-- In the permission section, we proceed by selecting the IAM role we created.
+### - In the permission section, we proceed by selecting the IAM role we created.
 
 <img width="1041" alt="Ekran Resmi 2022-06-25 17 36 58" src="https://user-images.githubusercontent.com/91700155/175809484-592f475f-f568-4c8b-a419-0e4704cbdb44.png">
 
-- Lambda function has been created. Now, go inside Lambda functions click on "Configuration".
+### - Lambda function has been created. Now, go inside Lambda functions click on "Configuration".
 
 <img width="685" alt="Ekran Resmi 2022-06-25 17 39 39" src="https://user-images.githubusercontent.com/91700155/175809587-e5f92f74-b3f2-46a0-aa13-70538792999e.png">
 
-- From here we select the VPC area Choose the subnet and add a VPC and Security Group we created earlier here. 
+### - From here we select the VPC area Choose the subnet and add a VPC and Security Group we created earlier here. 
 
 <img width="567" alt="Ekran Resmi 2022-06-25 17 40 58" src="https://user-images.githubusercontent.com/91700155/175809626-4370092b-2437-43a9-8971-aa7d341fed0b.png">
 
-- From Configuration we click on "File System" area and add a EFS we created earlier here.
+### - From Configuration we click on "File System" area and add a EFS we created earlier here.
 
 <img width="567" alt="Ekran Resmi 2022-06-25 17 42 12" src="https://user-images.githubusercontent.com/91700155/175809718-f5040313-dded-49ff-8f72-80a2b8733a40.png">
 
@@ -141,17 +141,17 @@ Now what we can create our test sample with our EFS through an EC2 instance, thi
  
 EC2 stands for Elastic cloud computing. It allows you to create a server.  We’ll just create a simple and free kind of EC2 instance and then we’ll mount the EFS that we created on this instance.
 
-- I have progressed through Ubuntu 20.04, but you can proceed as you wish, except for the "configure instance" and "configure security group" fields, except this part, other parts are optional.
+### - I have progressed through Ubuntu 20.04, but you can proceed as you wish, except for the "configure instance" and "configure security group" fields, except this part, other parts are optional.
 
 <img width="567" alt="Ekran Resmi 2022-06-25 17 52 53" src="https://user-images.githubusercontent.com/91700155/175810046-b260ab7b-680b-4d89-80f3-6dfa3c63f021.png">
 <img width="851" alt="Ekran Resmi 2022-06-26 14 05 38" src="https://user-images.githubusercontent.com/91700155/175811244-1ba90d4b-4b37-404a-83b5-640924656cb1.png">
 <img width="851" alt="Ekran Resmi 2022-06-26 14 06 22" src="https://user-images.githubusercontent.com/91700155/175811256-70ce0053-b22c-4101-93d1-3eb7e673f0a5.png">
 
-- Create new key pair
+### - Create new key pair
 
 <img width="425" alt="Ekran Resmi 2022-06-25 17 55 12" src="https://user-images.githubusercontent.com/91700155/175810094-8f4bbd63-1df5-4cf2-b0fa-f17776335189.png">
 
-- Getting your connect instance inf.
+### - Getting your connect instance inf.
 
 <img width="567" alt="Ekran Resmi 2022-06-25 18 02 25" src="https://user-images.githubusercontent.com/91700155/175810097-72d919e3-701d-416e-9f4b-282afec0cbd3.png">
 <img width="930" alt="Ekran Resmi 2022-06-25 18 04 45" src="https://user-images.githubusercontent.com/91700155/175810078-972089fb-c2ef-4578-8bff-e834d49f6b8d.png">
