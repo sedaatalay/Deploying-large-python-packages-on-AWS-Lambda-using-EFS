@@ -48,25 +48,25 @@ Go to console and look for EFS. Then click in "create file system" and then give
 
 <img width="425" alt="Ekran Resmi 2022-06-25 17 23 27" src="https://user-images.githubusercontent.com/91700155/175808720-931262cf-ef5e-4225-a8cf-993d144ae4d4.png">
 
-### - Network 
+#### - Network 
  
-#### Select the EFS that you created and click the network area:
+##### Select the EFS that you created and click the network area:
 
 <img width="1131" alt="Ekran Resmi 2022-06-25 17 23 53" src="https://user-images.githubusercontent.com/91700155/175808882-a3d11974-7941-4634-9969-720a88c71d25.png">
 
-#### Then click a button that says "Manage". Now we will add security group that we created before in addition you can add default security group. 
+##### Then click a button that says "Manage". Now we will add security group that we created before in addition you can add default security group. 
 
 <img width="1152" alt="Ekran Resmi 2022-06-25 17 28 54" src="https://user-images.githubusercontent.com/91700155/175808937-b67a01bf-fa94-4078-a98c-bd7b6b422d5f.png">
 
-### - Access Point
+#### - Access Point
 
-#### Select the EFS that you created and click on Access points. Then click on "Create access point".
+##### Select the EFS that you created and click on Access points. Then click on "Create access point".
 
 <img width="851" alt="Ekran Resmi 2022-06-25 17 30 32" src="https://user-images.githubusercontent.com/91700155/175809044-15583814-36bf-49d4-bdc0-5c1f9d2b8e37.png">
 
-#### The important part is the directory name at the end. This folder is where we'll have the libraries that the Lambda Function will be able to connect to.
+##### The important part is the directory name at the end. This folder is where we'll have the libraries that the Lambda Function will be able to connect to.
  
-#### The rest is optional. I filled in the optional parts as in the appendix.
+##### The rest is optional. I filled in the optional parts as in the appendix.
 
 <img width="567" alt="Ekran Resmi 2022-06-25 17 32 53" src="https://user-images.githubusercontent.com/91700155/175809163-340c8ba3-2676-4c00-9288-d6626f427d8e.png">
 <img width="567" alt="Ekran Resmi 2022-06-25 17 33 01" src="https://user-images.githubusercontent.com/91700155/175809166-12b296cb-0bb1-41b4-9c79-497aca5a28fa.png">
@@ -139,7 +139,7 @@ Now what we can create our test sample with our EFS through an EC2 instance, thi
 
 ### 7. Create an EC2 instance
  
-EC2 stands for Elastic cloud computing. It allows you to create a server.  We’ll just create a simple and free kind of EC2 instance and then we’ll mount the EFS that we created on this instance.
+#### EC2 stands for Elastic cloud computing. It allows you to create a server.  We’ll just create a simple and free kind of EC2 instance and then we’ll mount the EFS that we created on this instance.
 
 #### - I have progressed through Ubuntu 20.04, but you can proceed as you wish, except for the "configure instance" and "configure security group" fields, except this part, other parts are optional.
 
@@ -157,22 +157,26 @@ EC2 stands for Elastic cloud computing. It allows you to create a server.  We’
 <img width="930" alt="Ekran Resmi 2022-06-25 18 04 45" src="https://user-images.githubusercontent.com/91700155/175810078-972089fb-c2ef-4578-8bff-e834d49f6b8d.png">
 
 #### - Example Installations 
-    - NFS Configurations
+ 
+##### NFS Configurations
+ 
 ```console
 sudo apt-get update
 sudo apt-get install nfs-common
 mkdir mnt
 ```
-
-   After doing that let's go to the EFS we created and click the attach part in the upper right. Copy the NFS client command paste that but without the "efs" at the end.
+##### After doing that let's go to the EFS we created and click the attach part in the upper right. Copy the NFS client command paste that but without the "efs" at the end.
 
 <img width="1248" alt="Ekran Resmi 2022-06-25 18 06 46" src="https://user-images.githubusercontent.com/91700155/175810616-e79691d2-7951-4bf4-a80c-eb695e380552.png">
 
-#### For me: 
+##### For me: 
+ 
 ```console
 sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-095de34f07883e4b0.efs.eu-central-1.amazonaws.com:/ mnt
 ```
-   #### Python Installations
+ 
+##### Python Installations
+ 
 ```console
 sudo apt-get install python3.8
 sudo apt-get install python3-pip
@@ -184,8 +188,10 @@ pip3 install --upgrade --target mnt/access/ numpy
 ```
  
 ### 8. Lambda Function with example libraries from EFS
+ 
 Let’s go back to the Lambda. Deploy the example code.
-```
+ 
+```console
 import json
 import os
 import sys
