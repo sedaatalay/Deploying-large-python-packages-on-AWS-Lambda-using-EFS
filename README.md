@@ -1,4 +1,4 @@
-Deploying large python packages on AWS Lambda using EFS + Serverless API  using API Gateway
+Deploying large python packages on AWS Lambda using EFS 
 
 In this chapter, we will work a few of the many different services that aws provides and how it provides us with many different tools to be able to deploy our work.
 
@@ -105,7 +105,7 @@ Here we will test whether the connection between EFS and Lambda works with a sma
 
 Go to the "Code" part of your Lambda. Copy the following exapmle code.
 
-
+```console
 import json
 import os
 import sys
@@ -120,16 +120,86 @@ def lambda_handler(event, context):
     
     
     print('After: ',os.listdir('/mnt/access'))
-    
+```
+These codes print the files and folders in /mnt/access before and after the creation of a simple file that says "hello world".
+Then you have to click on 'Deploy', 'Test' and finally you will get a printout.
 
+<img width="680" alt="Ekran Resmi 2022-06-26 13 28 54" src="https://user-images.githubusercontent.com/91700155/175809989-3fed82c2-026d-4ae0-83f7-1def7335b3bb.png">
+
+Congratulations! We have the EFS already connected with our simple Lambda Function.
+Now what we can create our test sample with our EFS through an EC2 instance, this will make easier install files on our /mnt/access folder.
 
 7. Create an EC2 instance
+EC2 stands for Elastic cloud computing. It allows you to create a server.  We’ll just create a simple and free kind of EC2 instance and then we’ll mount the EFS that we created on this instance.
 
-7. Connect EC2 instance
+I have progressed through Ubuntu 20.04, but you can proceed as you wish, except for the "configure instance" and "configure security group" fields, except this part, other parts are optional.
 
-8. Lambda Function using libraries from EFS
+<img width="567" alt="Ekran Resmi 2022-06-25 17 52 53" src="https://user-images.githubusercontent.com/91700155/175810046-b260ab7b-680b-4d89-80f3-6dfa3c63f021.png">
+<img width="851" alt="Ekran Resmi 2022-06-26 14 05 38" src="https://user-images.githubusercontent.com/91700155/175811244-1ba90d4b-4b37-404a-83b5-640924656cb1.png">
+<img width="851" alt="Ekran Resmi 2022-06-26 14 06 22" src="https://user-images.githubusercontent.com/91700155/175811256-70ce0053-b22c-4101-93d1-3eb7e673f0a5.png">
 
-9. Create API Gateway
 
-10. API Gateway test example
+Create new key pair
+<img width="425" alt="Ekran Resmi 2022-06-25 17 55 12" src="https://user-images.githubusercontent.com/91700155/175810094-8f4bbd63-1df5-4cf2-b0fa-f17776335189.png">
+
+Getting your connect instance inf.
+<img width="567" alt="Ekran Resmi 2022-06-25 18 02 25" src="https://user-images.githubusercontent.com/91700155/175810097-72d919e3-701d-416e-9f4b-282afec0cbd3.png">
+<img width="930" alt="Ekran Resmi 2022-06-25 18 04 45" src="https://user-images.githubusercontent.com/91700155/175810078-972089fb-c2ef-4578-8bff-e834d49f6b8d.png">
+
+- Example Installations 
+
+   - NFS Configurations
+```console
+sudo apt-get update
+sudo apt-get install nfs-common
+mkdir mnt
+```
+
+After doing that let's go to the EFS we created and click the attach part in the upper right. Copy the NFS client command paste that but without the "efs" at the end.
+
+<img width="1248" alt="Ekran Resmi 2022-06-25 18 06 46" src="https://user-images.githubusercontent.com/91700155/175810616-e79691d2-7951-4bf4-a80c-eb695e380552.png">
+
+For me: 
+```console
+sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-095de34f07883e4b0.efs.eu-central-1.amazonaws.com:/ mnt
+```
+   - Python Installations
+```console
+sudo apt-get install python3.8
+sudo apt-get install python3-pip
+sudo update-alternatives --config python3
+```
+   - Now I will install the Python libraries in my access folder.
+```console      
+pip3 install --upgrade --target mnt/access/ numpy
+```
+ 
+8. Lambda Function with example libraries from EFS
+Let’s go back to the Lambda. Deploy the example code.
+```
+import json
+import os
+import sys
+import numpy as np
+
+# connecting to the folder with the libraries
+sys.path.append('/mnt/access')
+
+def lambda_handler(event, context):
+    print(np.ones(3))
+```
+
+<img width="368" alt="Ekran Resmi 2022-06-25 18 19 05" src="https://user-images.githubusercontent.com/91700155/175811518-f8018ca6-c56e-48ff-8c9e-e2912f147a37.png">
+
+Great! We connected our EFS to our lambda function and we are using the libraries that we installed there in our EC2!
+
+#### Next Lecturer we will do different example with more libraries using Serverless API and API Gateway
+To reach :
+
+
+<p>>/br>
+   <p>
+
+
+Thanks for your time :)
 
