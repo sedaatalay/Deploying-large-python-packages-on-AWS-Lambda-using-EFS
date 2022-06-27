@@ -18,6 +18,8 @@
 
 #### EFS stands for Elastic File System and is a file system located inside a VPC (Virtual private cloud) that allows you to store or access data. Having the libraries in EFS and having the Lambda function we will use use these libraries. 
 
+![untitled-diagram](https://user-images.githubusercontent.com/91700155/175938175-2f4391b3-a244-4c5a-80f4-f0f0313b3d6a.png)
+
 ### Let's do it step by step 
 
 <p>
